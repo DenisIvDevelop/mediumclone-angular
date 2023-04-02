@@ -1,5 +1,7 @@
+import { registerAction } from './../../store/actions/register.action';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'mc-register',
@@ -9,7 +11,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class ReqisterComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -23,5 +25,9 @@ export class ReqisterComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    console.log(this.form.value);
+
+    this.store.dispatch(registerAction(this.form.value));
+  }
 }
