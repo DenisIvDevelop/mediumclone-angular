@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
+import { RegisterRequestInterface } from '../../types/registerRequest.interface';
 
 @Component({
   selector: 'mc-register',
@@ -37,10 +38,9 @@ export class ReqisterComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.form.value);
-
-    this.store.dispatch(registerAction(this.form.value));
-    this.authService.register(this.form.value).subscribe((currentUser: CurrentUserInterface) => {
-      console.log(currentUser);
-    });
+    const request: RegisterRequestInterface = {
+      user: this.form.value,
+    };
+    this.store.dispatch(registerAction({ request }));
   }
 }

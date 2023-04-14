@@ -5,8 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ReqisterComponent } from './components/register/register.component';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './store/reducer';
 import { AuthService } from './services/auth.service';
+import { RegisterEffect } from './store/effects/register.effect';
 
 const routes: Routes = [
   {
@@ -17,7 +19,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [ReqisterComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, StoreModule.forFeature('auth', reducer)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    StoreModule.forFeature('auth', reducer),
+    EffectsModule.forFeature([RegisterEffect]),
+  ],
   providers: [AuthService],
 })
 export class AuthModule {}
