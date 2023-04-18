@@ -8,7 +8,10 @@
                         Have an account ?
                     </a>
                 </p>
-                Backend erros are here
+                <mc-backend-error-massages
+                    *ngIf="backendErrors$ | async"
+                    [backendErrors]="backendErrors$ | async"
+                ></mc-backend-error-massages>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <fieldset>
                         <fieldset class="form-group">
