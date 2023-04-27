@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
 import { RegisterRequestInterface } from '../../types/registerRequest.interface';
 import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface';
 
