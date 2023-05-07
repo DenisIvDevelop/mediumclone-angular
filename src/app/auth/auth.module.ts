@@ -6,13 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReqisterComponent } from './components/register/register.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducer } from './store/reducer';
+import { reducer } from './store/reducers';
 import { AuthService } from './services/auth.service';
 import { RegisterEffect } from './store/effects/register.effect';
 import { BackendErrorMessageModule } from '../shared/modules/backendErrorMessages';
 import { PersistanceService } from '../shared/serices';
 import { LoginEffect } from './store/effects/login.effect';
 import { LoginComponent } from './components/login/login.component';
+import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     StoreModule.forFeature('auth', reducer),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect, GetCurrentUserEffect]),
     BackendErrorMessageModule,
   ],
   providers: [AuthService, PersistanceService],
