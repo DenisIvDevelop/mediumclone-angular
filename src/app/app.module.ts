@@ -8,8 +8,10 @@ import { environment } from 'environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
+import { PersistanceService } from './shared/serices';
+import { AuthInterceptor } from './shared/serices/authinterceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +31,14 @@ import { TopBarModule } from './shared/modules/topBar/topBar.module';
     }),
     TopBarModule,
   ],
-  providers: [],
+  providers: [
+    PersistanceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
